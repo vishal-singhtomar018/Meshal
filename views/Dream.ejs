@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with <%=hername %> 💔</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/Style.css">
+</head>
+
+<body>
+  <!-- Floating hearts background -->
+  <div class="floating-hearts" id="floatingHearts"></div>
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="profile-pic"><i class="fas fa-heart"></i></div>
+      <div class="header-content">
+        <h1>
+          <%=hername %> 💔<span class="heart-pulse">❤️</span>
+        </h1>
+        <div class="status"><span class="status-dot"></span> Online - Last seen just now</div>
+      </div>
+
+      <!-- 3-dot menu -->
+      <div class="chat-options">
+        <i class="fas fa-ellipsis-v" id="optionsMenuBtn"></i>
+        <div class="options-dropdown" id="optionsDropdown">
+          <form action="/clear" method="POST">
+            <button type="submit">🗑️ Clear Chats</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <% if (chatHistory && chatHistory.length> 0) { %>
+        <% chatHistory.forEach(msg=> { %>
+          <div class="message <%= msg.role === 'user' ? 'user' : 'bot' %>">
+            <% if (msg.role==='bot' ) { %>
+              <span class="bot-message-decoration left">❣️</span>
+              <span class="message-text">
+                <%= msg.text %>
+              </span>
+              <span class="bot-message-decoration right">💖</span>
+              <% } else { %>
+                <span class="message-text">
+                  <%= msg.text %>
+                </span>
+                <% } %>
+          </div>
+          <% }) %>
+            <% } else { %>
+              <div class="message bot">
+                <span class="message-text">Hey Babu! 😊 Kaise ho?</span>
+              </div>
+              <% } %>
+    </div>
+
+    <!-- Chat Form (NO action/method) -->
+    <form id="chatForm" class="chat-input-area">
+      <input type="text" id="userInput" name="message" placeholder="Message <%= hername %>" autocomplete="off" required>
+      <button id="sendButton" type="submit"><i class="fas fa-paper-plane"></i></button>
+    </form>
+
+  </div>
+
+  <!-- Inline Script -->
+  <script src="/Script.js"> </script>
+</body>
+
+</html>
