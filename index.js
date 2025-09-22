@@ -30,8 +30,7 @@ let chatHistory = [];
 
 // Render main page
 app.get("/", (req, res) => {
-  const hername=process.env.hername;
-  res.render("Dream", { chatHistory,hername});
+  res.render("Dream", { chatHistory});
 });
 
 app.post("/chat", async (req, res) => {
